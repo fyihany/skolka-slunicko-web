@@ -23,6 +23,12 @@ const props = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- Synchronní skript — běží před prvním vykreslením, přidá třídu pro GSAP initial states -->
+    <script is:inline>
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-anim');
+      }
+    </script>
   </head>
   <body class="flex min-h-screen flex-col bg-white">
     <Navigation />
@@ -30,5 +36,8 @@ const props = Astro.props;
       <slot />
     </main>
     <Footer />
+    <script>
+      import '../scripts/animations.ts';
+    </script>
   </body>
 </html>

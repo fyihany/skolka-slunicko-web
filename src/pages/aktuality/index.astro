@@ -83,7 +83,7 @@ const news = [
   <section class="py-16 bg-[#F0F7FF]" aria-labelledby="aktuality-seznam-heading">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 id="aktuality-seznam-heading" class="sr-only">Seznam aktualit</h2>
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
         {news.map(({ slug, title, perex, dateFormatted, date, icon, iconColor, bg, ring, dateBg, dateText }) => (
           <article class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition flex flex-col", bg, ring]}>
             <Icon name={icon} class:list={["h-9 w-9 mb-4", iconColor]} aria-hidden="true" />

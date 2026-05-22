@@ -16,6 +16,18 @@
   --radius-3xl: 10px;
 }
 
+/* GSAP initial states — elementy jsou skryté hned od CSS, ještě před JS */
+/* Třída js-anim je přidána synchronně v <head> před prvním vykreslením */
+.js-anim [data-hero-content] > *,
+.js-anim [data-hero-logo],
+.js-anim [data-page-hero-content] > *,
+.js-anim [data-hero-icon],
+.js-anim [data-stagger] > *,
+.js-anim [data-fade-up],
+.js-anim [data-timeline] li {
+  opacity: 0;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
