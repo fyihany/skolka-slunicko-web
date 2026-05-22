@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Galerie", "item": "https://www.skolka-slunicko.cz/galerie" }
+    ]
+  }
+];
+
+const categories = ["Všechny", "Aktivity", "Výlety", "Besídky", "Příroda"];
+const placeholders = Array.from({ length: 9 }, (_, i) => i + 1);
+const galleryColors = [
+  { bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+  { bg: "bg-[#FFF3E0]", ring: "ring-[#FFCC80]/40" },
+  { bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+];
+---
+
+<BaseLayout
+  title="Fotogalerie | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Fotogalerie MŠ Sluníčko Ostrava-Poruba. Nahlédněte do každodenního života naší školky — aktivity, výlety, besídky a příroda."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/galerie"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Galerie</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="galerie-heading" icon="ph:camera-duotone">
+    <h1 id="galerie-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Fotogalerie
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Nahlédněte do každodenního života naší školky.
+    </p>
+  </PageHero>
+
+  <!-- Filtry / kategorie -->
+  <section class="py-10 bg-[#FFF0F5]" aria-labelledby="galerie-grid-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Kategorie fotek" id="gallery-tabs">
+        {categories.map((cat, index) => (
+          <button
+            role="tab"
+            aria-selected={index === 0}
+            data-category={cat}
+            class:list={[
+              "gallery-tab rounded-lg px-5 py-2 text-sm font-bold transition",
+              index === 0
+                ? "bg-[#F9C22E] text-[#2D2D2D]"
+                : "bg-white text-gray-600 hover:bg-[#FFF9C4] ring-1 ring-gray-200"
+            ]}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid -->
+      <h2 id="galerie-grid-heading" class="sr-only">Fotografie ze školky</h2>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3" id="gallery-grid">
+        {placeholders.map((n, i) => (
+          <div
+            class:list={["aspect-square rounded-lg ring-1 flex flex-col items-center justify-center gap-2 text-gray-400", galleryColors[i].bg, galleryColors[i].ring]}
+            aria-label={`Fotografie ${n} — bude doplněna`}
+          >
+            <svg class="h-8 w-8 text-[#F9C22E]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-xs text-center px-2 leading-tight">Fotografie budou doplněny</span>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-8 text-center text-sm text-gray-400">
+        Fotografie z akcí jsou průběžně doplňovány.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // TODO: fetch z Google Drive přes Apps Script API
+  // async function loadGallery(category = 'Všechny') {
+  //   const res = await fetch(`APPS_SCRIPT_URL?action=galerie&category=${category}`);
+  //   const data = await res.json();
+  //   renderGallery(data);
+  // }
+
+  // Tab switching
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.gallery-tab');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => {
+        t.setAttribute('aria-selected', 'false');
+        t.classList.remove('bg-[#F9C22E]', 'text-[#2D2D2D]');
+        t.classList.add('bg-white', 'text-gray-600', 'ring-1', 'ring-gray-200');
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.classList.add('bg-[#F9C22E]', 'text-[#2D2D2D]');
+      tab.classList.remove('bg-white', 'text-gray-600', 'ring-1', 'ring-gray-200');
+      // TODO: loadGallery(tab.dataset.category);
+    });
+  });
+</script>

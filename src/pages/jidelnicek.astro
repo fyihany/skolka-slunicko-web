@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Jídelníček", "item": "https://www.skolka-slunicko.cz/jidelnicek" }
+    ]
+  }
+];
+
+const dayColors = [
+  { bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+];
+
+const placeholderMenu = [
+  { day: "Pondělí", soup: "Kuřecí vývar s nudlemi", main: "Vepřové maso na houbách, knedlík" },
+  { day: "Úterý", soup: "Brokolicová polévka", main: "Těstoviny s bolognese omáčkou" },
+  { day: "Středa", soup: "Čočková polévka", main: "Kuřecí řízek, bramborový salát" },
+  { day: "Čtvrtek", soup: "Rajčatová polévka s rýží", main: "Špenát, vejce, brambory" },
+  { day: "Pátek", soup: "Zeleninová polévka", main: "Rybí filé, tartar, brambory" },
+];
+---
+
+<BaseLayout
+  title="Jídelníček | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Jídelníček MŠ Sluníčko Ostrava-Poruba. Vyvážená a chutná strava, 75 Kč/den (celý den). Stravování přes systém Strava.cz."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/jidelnicek"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Jídelníček</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="jidelnicek-heading" icon="ph:fork-knife-duotone">
+    <h1 id="jidelnicek-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Jídelníček
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Dbáme na vyváženou a chutnou stravu. Jídelníček aktualizujeme každý týden.
+    </p>
+  </PageHero>
+
+  <!-- Info box stravování -->
+  <section class="py-8 bg-white" aria-labelledby="strava-info-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="strava-info-heading" class="sr-only">Informace o stravování</h2>
+      <div class="rounded-xl bg-[#E3F2FD] ring-2 ring-[#90CAF9]/40 p-6">
+        <div class="flex flex-wrap items-center gap-6 justify-center text-sm font-semibold text-[#2D2D2D]">
+          <div class="flex items-center gap-2">
+            <Icon name="ph:fork-knife-duotone" class="h-5 w-5 text-[#D4A017]" aria-hidden="true" />
+            <span>Strava přes systém <strong>Strava.cz</strong></span>
+          </div>
+          <div class="h-4 w-px bg-[#F9C22E] hidden sm:block" aria-hidden="true"></div>
+          <div class="flex items-center gap-2">
+            <Icon name="ph:tag-duotone" class="h-5 w-5 text-[#1565C0]" aria-hidden="true" />
+            <span><strong>75 Kč/den</strong> — celý den</span>
+          </div>
+          <div class="h-4 w-px bg-[#F9C22E] hidden sm:block" aria-hidden="true"></div>
+          <div class="flex items-center gap-2">
+            <Icon name="ph:tag-duotone" class="h-5 w-5 text-[#1565C0]" aria-hidden="true" />
+            <span><strong>65 Kč/den</strong> — půl den</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aktuální jídelníček (dynamická sekce) -->
+  <section class="py-16 bg-[#FFFBF0]" aria-labelledby="aktualni-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
+        <h2 id="aktualni-heading" class="text-2xl font-black text-[#2D2D2D]">Aktuální jídelníček</h2>
+        <div id="jidelnicek-spinner" class="flex items-center gap-2 text-sm text-gray-500" aria-live="polite">
+          <svg class="h-4 w-4 animate-spin text-[#D4A017]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          Načítám jídelníček...
+        </div>
+      </div>
+
+      <div id="jidelnicek-data" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label="Jídelníček aktuálního týdne">
+        <!-- Placeholder data - budou nahrazena dynamicky z Google Tabulky -->
+        {placeholderMenu.map(({ day, soup, main }, i) => (
+          <div class:list={["rounded-lg p-5 ring-1", dayColors[i].bg, dayColors[i].ring]}>
+            <h3 class="font-black text-[#2D2D2D] mb-3">{day}</h3>
+            <div class="space-y-2">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wide text-gray-400">Polévka</span>
+                <p class="text-sm text-gray-700 mt-0.5">{soup}</p>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wide text-gray-400">Hlavní jídlo</span>
+                <p class="text-sm text-gray-700 mt-0.5">{main}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-6 text-center text-sm text-gray-400 italic">
+        Ukázka struktury — aktuální jídelníček bude doplňován automaticky z Google Tabulky.
+      </p>
+    </div>
+  </section>
+
+  <!-- Ceny stravování -->
+  <section class="py-16 bg-white" aria-labelledby="ceny-strava-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="ceny-strava-heading" class="text-2xl font-black text-[#2D2D2D] mb-8 text-center">Ceny a podmínky stravování</h2>
+      <div class="max-w-2xl mx-auto space-y-4">
+        {[
+          { title: "Celý den", price: "75 Kč/den", items: ["2× svačina (dopolední + odpolední)", "Oběd", "Pitný režim celý den"] },
+          { title: "Půl den", price: "65 Kč/den", items: ["1× svačina (dopolední)", "Oběd", "Pitný režim dopoledne"] },
+        ].map(({ title, price, items }) => (
+          <div class="rounded-lg bg-[#FFFBF0] p-5 ring-1 ring-[#F9C22E]/30">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-[#2D2D2D]">{title}</h3>
+              <span class="font-black text-[#D4A017] text-lg">{price}</span>
+            </div>
+            <ul class="space-y-1">
+              {items.map((item) => (
+                <li class="flex items-center gap-2 text-sm text-gray-600">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#F9C22E] shrink-0" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <div class="rounded-lg bg-gray-50 p-4 text-sm text-gray-600">
+          <strong>Platba stravy:</strong> Přes systém <strong>Strava.cz</strong>. Přihlašovací údaje obdržíte po přijetí dítěte do školky.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // TODO: fetch z Google Apps Script API
+  // Příklad budoucí integrace:
+  // async function loadMenu() {
+  //   const res = await fetch('APPS_SCRIPT_URL?action=jidelnicek');
+  //   const data = await res.json();
+  //   renderMenu(data);
+  // }
+  // loadMenu();
+
+  // Skrýt spinner po načtení placeholder dat
+  const spinner = document.getElementById('jidelnicek-spinner');
+  if (spinner) {
+    spinner.style.display = 'none';
+  }
+</script>

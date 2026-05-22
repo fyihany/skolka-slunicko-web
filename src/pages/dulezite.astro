@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Důležité informace", "item": "https://www.skolka-slunicko.cz/dulezite" }
+    ]
+  }
+];
+
+const educationalProgram = [
+  { icon: "ph:music-notes-duotone", iconColor: "text-[#D4A017]", title: "Hudební aktivity", items: ["Zpěv", "Hra na nástroje", "Rytmika", "Muzikoterapie"], bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { icon: "ph:paint-brush-duotone", iconColor: "text-[#AD1457]", title: "Výtvarné aktivity", items: ["Kresba", "Malba", "Keramika", "Modelování"], bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { icon: "ph:mask-happy-duotone", iconColor: "text-[#1565C0]", title: "Dramatické aktivity", items: ["Pohádky", "Dramatizace", "Rozvoj komunikace"], bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { icon: "ph:person-simple-run-duotone", iconColor: "text-[#2E7D32]", title: "Pohybové aktivity", items: ["Atletika", "Bruslení", "Jóga", "Tanec", "Skupinové sporty"], bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { icon: "ph:globe-duotone", iconColor: "text-[#6A1B9A]", title: "Jazykový rozvoj", items: ["Slovní zásoba", "Sluchové hry", "Práce s textem a příběhy"], bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+];
+---
+
+<BaseLayout
+  title="Důležité informace | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Základní informace o soukromé mateřské škole Sluníčko: provozovatel REDUZA pro s.r.o., kapacita 24 dětí, adresa Ostrava-Poruba, vzdělávací program."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/dulezite"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Důležité informace</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="dulezite-heading" icon="ph:info-duotone">
+    <h1 id="dulezite-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Důležité informace
+    </h1>
+    <blockquote class="mt-6 border-l-4 border-[#F9C22E] pl-5">
+      <p class="text-lg font-semibold italic text-[#2D2D2D] leading-relaxed">
+        „V semínkách všedních věcí leží klíčky mimořádných spojení. Přijde čas, přinesou plody."
+      </p>
+    </blockquote>
+  </PageHero>
+
+  <!-- Základní informace -->
+  <section class="py-16 bg-[#F0F7FF]" aria-labelledby="zakladni-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="zakladni-heading" class="text-2xl font-black text-[#2D2D2D] mb-8">Základní informace</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[
+          { icon: "ph:house-simple-duotone", iconColor: "text-[#D4A017]", label: "Typ školky", value: "Soukromá mateřská škola rodinného typu", bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+          { icon: "ph:buildings-duotone", iconColor: "text-[#AD1457]", label: "Provozovatel", value: "REDUZA pro s.r.o.", bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+          { icon: "ph:baby-duotone", iconColor: "text-[#1565C0]", label: "Kapacita", value: "24 dětí", bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+          { icon: "ph:clock-duotone", iconColor: "text-[#2E7D32]", label: "Provozní doba", value: "Pondělí–pátek 6:30–17:00", bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+          { icon: "ph:map-pin-duotone", iconColor: "text-[#6A1B9A]", label: "Adresa", value: "Bohuslava Martinů 812/11, Ostrava-Poruba, 708 00", bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+          { icon: "ph:phone-duotone", iconColor: "text-[#E65100]", label: "Telefon", value: "725 828 130", bg: "bg-[#FFF3E0]", ring: "ring-[#FFCC80]/40" },
+        ].map(({ icon, iconColor, label, value, bg, ring }) => (
+          <div class:list={["rounded-lg p-5 ring-1", bg, ring]}>
+            <div class="flex items-start gap-3">
+              <Icon name={icon} class:list={["h-5 w-5 shrink-0 mt-0.5", iconColor]} aria-hidden="true" />
+              <div>
+                <p class="text-xs font-bold uppercase tracking-wide text-gray-400">{label}</p>
+                <p class="mt-1 font-semibold text-[#2D2D2D] text-sm leading-snug">{value}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Vzdělávací program -->
+  <section class="py-16 bg-[#FFFBF0]" aria-labelledby="program-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+        <div>
+          <h2 id="program-heading" class="text-2xl font-black text-[#2D2D2D]">Vzdělávací program</h2>
+          <p class="mt-2 text-gray-500 text-sm">Přehled aktivit a zaměření výuky v naší školce.</p>
+        </div>
+        <a
+          href="/ke-stazeni"
+          class="inline-flex items-center gap-2 rounded-lg bg-[#F9C22E] px-5 py-2.5 text-sm font-bold text-[#2D2D2D] transition hover:bg-[#D4A017] shrink-0"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          Školní vzdělávací program (ke stažení)
+        </a>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {educationalProgram.map(({ icon, iconColor, title, items, bg, ring }) => (
+          <div class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
+            <Icon name={icon} class:list={["h-9 w-9 mb-3", iconColor]} aria-hidden="true" />
+            <h3 class="font-bold text-lg text-[#2D2D2D] mb-3">{title}</h3>
+            <ul class="space-y-1">
+              {items.map((item) => (
+                <li class="flex items-center gap-2 text-sm text-gray-600">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#F9C22E] shrink-0" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dokumenty odkaz -->
+  <section class="py-14 bg-white" aria-labelledby="dokumenty-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 id="dokumenty-heading" class="text-2xl font-black text-[#2D2D2D] mb-4">Potřebné dokumenty</h2>
+      <p class="text-gray-600 mb-6 leading-relaxed">
+        Přihlášky, školní řád, školní vzdělávací program a další dokumenty najdete ke stažení na samostatné stránce.
+      </p>
+      <a
+        href="/ke-stazeni"
+        class="inline-flex items-center gap-2 rounded-lg bg-[#F9C22E] px-7 py-3.5 font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]"
+      >
+        Přejít na ke stažení
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

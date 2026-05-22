@@ -1,0 +1,143 @@
+---
+import Logo from "./Logo.astro";
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navLinks = [
+  { href: "/", label: "Domů" },
+  { href: "/o-skolce", label: "O školce" },
+  { href: "/nas-den", label: "Náš den" },
+  { href: "/krouzky", label: "Kroužky" },
+  { href: "/cenik", label: "Ceník" },
+  { href: "/aktuality", label: "Aktuality" },
+  { href: "/galerie", label: "Galerie" },
+];
+
+const secondaryLinks = [
+  { href: "/jidelnicek", label: "Jídelníček" },
+  { href: "/registrace", label: "Registrace" },
+  { href: "/ke-stazeni", label: "Ke stažení" },
+  { href: "/kontakt", label: "Kontakt" },
+];
+
+function isActive(href: string) {
+  const path = currentPath.replace(base, '') || '/';
+  if (href === "/") return path === "/" || path === "";
+  return path.startsWith(href);
+}
+---
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-sun focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">
+  Přejít na hlavní obsah
+</a>
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-sm">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 shrink-0" aria-label="Mateřská škola Sluníčko – zpět na úvodní stránku">
+        <Logo width={44} height={47} class="h-11 w-auto" />
+        <span class="hidden sm:block font-bold text-lg leading-tight">
+          MŠ <span class="text-[#D4A017]">Sluníčko</span>
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav aria-label="Hlavní navigace" class="hidden lg:flex items-center gap-1">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            aria-current={isActive(href) ? "page" : undefined}
+            class={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
+              isActive(href)
+                ? "bg-[#F9C22E] text-[#2D2D2D]"
+                : "text-[#2D2D2D] hover:bg-[#FFFBF0] hover:text-[#D4A017]"
+            }`}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA + hamburger -->
+      <div class="flex items-center gap-3">
+        <a href="/registrace" class="hidden sm:inline-flex items-center justify-center rounded-lg bg-[#F9C22E] px-4 py-2 text-sm font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]">
+          Zapsat dítě
+        </a>
+        <button
+          id="menu-toggle"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Otevřít navigační menu"
+          class="lg:hidden rounded-lg p-2 text-[#2D2D2D] hover:bg-[#FFFBF0] transition"
+        >
+          <svg id="icon-open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="h-6 w-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-100" role="dialog" aria-label="Mobilní navigace">
+    <nav class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-1">
+      {[...navLinks, ...secondaryLinks].map(({ href, label }) => (
+        <a
+          href={href}
+          aria-current={isActive(href) ? "page" : undefined}
+          class={`px-4 py-3 rounded-lg text-sm font-semibold transition ${
+            isActive(href)
+              ? "bg-[#F9C22E] text-[#2D2D2D]"
+              : "text-[#2D2D2D] hover:bg-[#FFFBF0]"
+          }`}
+        >
+          {label}
+        </a>
+      ))}
+      <a href="/registrace" class="mt-2 text-center rounded-lg bg-[#F9C22E] px-4 py-3 text-sm font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]">
+        Zapsat dítě
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle")!;
+  const menu = document.getElementById("mobile-menu")!;
+  const iconOpen = document.getElementById("icon-open")!;
+  const iconClose = document.getElementById("icon-close")!;
+
+  toggle.addEventListener("click", () => {
+    const isOpen = menu.classList.contains("hidden");
+    menu.classList.toggle("hidden", !isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    iconOpen.classList.toggle("hidden", isOpen);
+    iconClose.classList.toggle("hidden", !isOpen);
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (!toggle.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+      menu.classList.add("hidden");
+      toggle.setAttribute("aria-expanded", "false");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+      menu.classList.add("hidden");
+      toggle.setAttribute("aria-expanded", "false");
+      iconOpen.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      toggle.focus();
+    }
+  });
+</script>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Projekty", "item": "https://www.skolka-slunicko.cz/projekty" }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Projekty a granty | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Projekty a granty MŠ Sluníčko Ostrava-Poruba. Projekt Kouzelný svět objevů financovaný z grantu statutárního města Ostravy, MO Poruba."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/projekty"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Projekty</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="projekty-heading" icon="ph:plant-duotone">
+    <h1 id="projekty-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Projekty a granty
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Jsme rádi, že můžeme realizovat projekty podporující rozvoj dětí.
+    </p>
+  </PageHero>
+
+  <!-- Projekt -->
+  <section class="py-16 bg-[#F5F0FF]" aria-labelledby="projekty-seznam-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="projekty-seznam-heading" class="sr-only">Aktuální projekty</h2>
+
+      <div class="max-w-3xl mx-auto">
+        <article class="rounded-xl bg-[#E3F2FD] p-8 ring-2 ring-[#90CAF9]/40 relative overflow-hidden">
+          <!-- Decorative bg -->
+          <div class="absolute top-0 right-0 h-32 w-32 rounded-full bg-[#F9C22E]/10 -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+
+          <div class="relative">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+              <div>
+                <span class="inline-flex items-center rounded-lg bg-[#F9C22E]/30 px-3 py-1 text-xs font-bold text-[#D4A017] mb-3">
+                  Aktivní projekt
+                </span>
+                <div class="flex items-center gap-3">
+                  <Icon name="ph:plant-duotone" class="h-8 w-8 text-[#1565C0]" aria-hidden="true" />
+                  <h3 class="text-2xl font-black text-[#2D2D2D]">Kouzelný svět objevů</h3>
+                </div>
+              </div>
+              <!-- Logo placeholder -->
+              <div
+                class="flex-shrink-0 rounded-lg bg-white ring-1 ring-[#F9C22E]/30 px-5 py-4 text-center min-w-[120px]"
+                aria-label="Logo Městského obvodu Poruba"
+              >
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-wide">Logo</div>
+                <div class="text-sm font-black text-[#2D2D2D] mt-1">MO Poruba</div>
+              </div>
+            </div>
+
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              <div class="bg-white rounded-lg p-4 ring-1 ring-[#F9C22E]/20">
+                <dt class="text-xs font-bold uppercase tracking-wide text-gray-400">Číslo projektu</dt>
+                <dd class="mt-1 font-semibold text-[#2D2D2D] text-sm">2025/11/0212</dd>
+              </div>
+              <div class="bg-white rounded-lg p-4 ring-1 ring-[#F9C22E]/20">
+                <dt class="text-xs font-bold uppercase tracking-wide text-gray-400">Financování</dt>
+                <dd class="mt-1 font-semibold text-[#2D2D2D] text-sm leading-snug">
+                  Grant z rozpočtu statutárního města Ostravy, městského obvodu Poruba
+                </dd>
+              </div>
+            </dl>
+
+            <div>
+              <h4 class="font-bold text-[#2D2D2D] mb-2">O projektu</h4>
+              <p class="text-gray-600 leading-relaxed text-sm">
+                Program zaměřený na rozvoj dětské zvídavosti a kreativního myšlení. Projekt umožňuje dětem objevovat svět kolem sebe prostřednictvím experimentů, tvoření a společného bádání. Podporuje přirozenou touhu dětí poznávat a rozvíjí jejich kritické myšlení od nejútlejšího věku.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <p class="mt-8 text-center text-sm text-gray-500">
+          Máte zájem o spolupráci nebo chcete vědět více?{" "}
+          <a href="/kontakt" class="font-semibold text-[#D4A017] hover:underline">Kontaktujte nás</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

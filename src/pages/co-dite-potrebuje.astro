@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Co dítě potřebuje", "item": "https://www.skolka-slunicko.cz/co-dite-potrebuje" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Jaké přezůvky dítě potřebuje?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dítě potřebuje pohodlné, pevné a bezpečné přezůvky. Pantofle nejsou vhodné — dítě by mohlo zakopnout."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Musím podepsat věci dítěte?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ano, prosíme, aby byly všechny věci podepsány jménem dítěte. Pomůže to předejít záměně."
+        }
+      }
+    ]
+  }
+];
+
+const items = [
+  {
+    icon: "ph:clipboard-text-duotone",
+    iconColor: "text-[#D4A017]",
+    title: "Vyplněná přihláška",
+    desc: "Přihláška musí být potvrzená pediatrem. Stáhněte ji z naší stránky ke stažení.",
+    link: { text: "Stáhnout přihlášku", href: "/ke-stazeni" },
+    bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40",
+  },
+  {
+    icon: "ph:sneaker-duotone",
+    iconColor: "text-[#AD1457]",
+    title: "Přezůvky",
+    desc: "Pohodlné, pevné a bezpečné přezůvky. Pantofle nejsou vhodné — dítě by mohlo zakopnout nebo si ublížit.",
+    link: null,
+    bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40",
+  },
+  {
+    icon: "ph:moon-stars-duotone",
+    iconColor: "text-[#1565C0]",
+    title: "Pyžamo",
+    desc: "Pro pohodlné spaní při odpoledním odpočinku. Pyžamo zůstává ve školce.",
+    link: null,
+    bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40",
+  },
+  {
+    icon: "ph:t-shirt-duotone",
+    iconColor: "text-[#2E7D32]",
+    title: "Náhradní oblečení",
+    desc: "Pro případ nehody nebo znečištění. Alespoň jedna kompletní sada náhradního oblečení.",
+    link: null,
+    bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40",
+  },
+  {
+    icon: "ph:coat-hanger-duotone",
+    iconColor: "text-[#6A1B9A]",
+    title: "Sezónní oblečení",
+    desc: "Oblečení odpovídající počasí a venkovním aktivitám. Pracovní oblečení na výtvarné aktivity.",
+    link: null,
+    bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40",
+  },
+];
+---
+
+<BaseLayout
+  title="Co dítě potřebuje | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Co připravit pro nástup do MŠ Sluníčko v Ostravě-Porubě. Seznam potřebných věcí: přihláška, přezůvky, pyžamo, náhradní oblečení a další."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/co-dite-potrebuje"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Co dítě potřebuje</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="potrebuje-heading" icon="ph:backpack-duotone" bg="bg-[#FFF0F5]">
+    <h1 id="potrebuje-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Co dítě potřebuje?
+    </h1>
+    <p class="mt-4 text-2xl font-bold text-[#D4A017] italic">
+      Obejmout, pochválit a mnoho pusinek!
+    </p>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Pro nástup do školky je potřeba připravit dítě i jeho výbavičku. Zde je vše, co budete potřebovat.
+    </p>
+  </PageHero>
+
+  <!-- Seznam věcí -->
+  <section class="py-16 bg-white" aria-labelledby="seznam-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="seznam-heading" class="text-2xl font-black text-[#2D2D2D] mb-8 text-center">
+        Co připravit pro nástup
+      </h2>
+      <div class="max-w-3xl mx-auto grid grid-cols-1 gap-5 sm:grid-cols-2">
+        {items.map(({ icon, iconColor, title, desc, link, bg, ring }, index) => (
+          <div class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-[#F9C22E]/20 flex items-center justify-center" aria-hidden="true">
+                <Icon name={icon} class:list={["h-6 w-6", iconColor]} />
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-xs font-bold text-[#D4A017]">#{index + 1}</span>
+                  <h3 class="font-bold text-[#2D2D2D]">{title}</h3>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed">{desc}</p>
+                {link && (
+                  <a href={link.href} class="mt-2 inline-flex items-center gap-1 text-xs font-bold text-[#D4A017] hover:underline">
+                    {link.text}
+                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Tip -->
+      <div class="max-w-3xl mx-auto mt-8">
+        <div class="rounded-xl bg-[#F9C22E]/10 border-2 border-[#F9C22E] p-6">
+          <div class="flex gap-3 items-start">
+            <Icon name="ph:lightbulb-duotone" class="h-7 w-7 shrink-0 text-[#D4A017]" aria-hidden="true" />
+            <p class="text-sm font-semibold text-[#2D2D2D]">
+              <strong>Tip:</strong> Podepište všechny věci jménem dítěte. Pomůže to předejít záměně a ujistí vás, že se věci vrátí domů.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 bg-[#2D2D2D]" aria-labelledby="potrebuje-cta-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 id="potrebuje-cta-heading" class="text-2xl font-black text-white">Připraveni nastoupit?</h2>
+      <p class="mt-3 text-gray-400">Stáhněte si přihlášku a udělejte první krok.</p>
+      <div class="mt-6 flex flex-wrap justify-center gap-4">
+        <a href="/ke-stazeni" class="inline-flex items-center gap-2 rounded-lg bg-[#F9C22E] px-7 py-3.5 font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]">
+          Stáhnout přihlášku
+        </a>
+        <a href="/registrace" class="inline-flex items-center rounded-lg border-2 border-white px-7 py-3.5 font-bold text-white transition hover:bg-white hover:text-[#2D2D2D]">
+          Registrace
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

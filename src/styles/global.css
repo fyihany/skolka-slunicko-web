@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sun: #F9C22E;
+  --color-sun-light: #FFFBF0;
+  --color-sun-dark: #D4A017;
+  --color-dark: #2D2D2D;
+  --color-muted: #6B7280;
+
+  /* Jednotný border radius — stačí změnit zde, projeví se všude */
+  --radius-sm:  4px;
+  --radius-md:  6px;
+  --radius-lg:  10px;
+  --radius-xl:  10px;
+  --radius-2xl: 10px;
+  --radius-3xl: 10px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    font-family: "Nunito", system-ui, sans-serif;
+    color: #2D2D2D;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Nunito", system-ui, sans-serif;
+    font-weight: 700;
+  }
+
+  :focus-visible {
+    outline: 2px solid #D4A017;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}

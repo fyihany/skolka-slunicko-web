@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Aktuality", "item": "https://www.skolka-slunicko.cz/aktuality" }
+    ]
+  }
+];
+
+const news = [
+  {
+    slug: "masopustni-pruvod-2025",
+    title: "Masopustní průvod 2025",
+    perex: "Letošní masopust byl plný barev a smíchu. Děti si vyrobily masky a prošly se průvodem.",
+    date: "2025-02-15",
+    dateFormatted: "15. 2. 2025",
+    icon: "ph:mask-happy-duotone",
+    iconColor: "text-[#D4A017]",
+    bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40",
+    dateBg: "bg-[#FCE4EC]", dateText: "text-[#c2185b]",
+  },
+  {
+    slug: "brusleni-nova-sezona",
+    title: "Bruslení — nová sezóna",
+    perex: "Zahájili jsme novou bruslařskou sezónu na stadionu Sareza. Děti se těší!",
+    date: "2024-09-10",
+    dateFormatted: "10. 9. 2024",
+    icon: "ph:medal-duotone",
+    iconColor: "text-[#1565C0]",
+    bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40",
+    dateBg: "bg-[#E8F5E9]", dateText: "text-[#388e3c]",
+  },
+  {
+    slug: "vanocni-besidka",
+    title: "Vánoční besídka",
+    perex: "Děkujeme všem rodičům za účast na naší vánoční besídce. Bylo to kouzelné odpoledne.",
+    date: "2024-12-20",
+    dateFormatted: "20. 12. 2024",
+    icon: "ph:star-duotone",
+    iconColor: "text-[#6A1B9A]",
+    bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40",
+    dateBg: "bg-[#EDE7F6]", dateText: "text-[#7b1fa2]",
+  },
+];
+---
+
+<BaseLayout
+  title="Aktuality | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Novinky a aktuality ze života mateřské školy Sluníčko v Ostravě-Porubě. Masopust, bruslení, vánoční besídka a další události."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/aktuality"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Aktuality</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="aktuality-heading" icon="ph:newspaper-duotone">
+    <h1 id="aktuality-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Aktuality
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Novinky ze života naší školky.
+    </p>
+  </PageHero>
+
+  <!-- Aktuality grid -->
+  <section class="py-16 bg-[#F0F7FF]" aria-labelledby="aktuality-seznam-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="aktuality-seznam-heading" class="sr-only">Seznam aktualit</h2>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {news.map(({ slug, title, perex, dateFormatted, date, icon, iconColor, bg, ring, dateBg, dateText }) => (
+          <article class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition flex flex-col", bg, ring]}>
+            <Icon name={icon} class:list={["h-9 w-9 mb-4", iconColor]} aria-hidden="true" />
+            <time dateTime={date} class:list={["inline-flex items-center rounded-lg px-3 py-0.5 text-xs font-bold mb-3 w-fit", dateBg, dateText]}>
+              {dateFormatted}
+            </time>
+            <h3 class="font-black text-lg text-[#2D2D2D] mb-2">{title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed flex-1">{perex}</p>
+            <a
+              href={`/aktuality/${slug}`}
+              class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#D4A017] hover:underline"
+              aria-label={`Číst více o: ${title}`}
+            >
+              Číst více
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // TODO: fetch aktualit z Google Apps Script API
+  // async function loadNews() {
+  //   const res = await fetch('APPS_SCRIPT_URL?action=aktuality');
+  //   const data = await res.json();
+  //   renderNews(data);
+  // }
+</script>

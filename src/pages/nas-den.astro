@@ -1,0 +1,153 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Náš den", "item": "https://www.skolka-slunicko.cz/nas-den" }
+    ]
+  }
+];
+
+const scheduleBgs = [
+  "bg-[#FFF9C4]",
+  "bg-[#FCE4EC]",
+  "bg-[#E3F2FD]",
+  "bg-[#E8F5E9]",
+  "bg-[#EDE7F6]",
+  "bg-[#FFF3E0]",
+  "bg-[#FFF9C4]",
+  "bg-[#FCE4EC]",
+  "bg-[#E3F2FD]",
+  "bg-[#E8F5E9]",
+];
+
+const schedule = [
+  { time: "6:30–8:30",   activity: "Příchod dětí, ranní volná hra",                                                icon: "ph:sun-horizon-duotone",        iconColor: "text-[#F59E0B]" },
+  { time: "8:00–9:00",   activity: "Volná hra, didaktické aktivity, jazykové chvilky, smyslové hry",               icon: "ph:puzzle-piece-duotone",       iconColor: "text-[#8B5CF6]" },
+  { time: "7:45–9:20",   activity: "Hygiena, ranní svačina",                                                       icon: "ph:fork-knife-duotone",         iconColor: "text-[#10B981]" },
+  { time: "9:20–10:20",  activity: "Řízená pedagogická činnost, pohybová aktivita, trénink bruslení a atletiky",   icon: "ph:person-simple-run-duotone",  iconColor: "text-[#EF4444]" },
+  { time: "10:20–11:30", activity: "Příprava na pobyt venku, vycházka",                                            icon: "ph:park-duotone",               iconColor: "text-[#059669]" },
+  { time: "11:30–12:30", activity: "Hygiena, oběd, příprava na odpočinek",                                         icon: "ph:fork-knife-duotone",         iconColor: "text-[#D4A017]" },
+  { time: "12:30–14:00", activity: "Odpočinek",                                                                     icon: "ph:bed-duotone",                iconColor: "text-[#6366F1]" },
+  { time: "14:00–14:30", activity: "Hygiena, odpolední svačina",                                                   icon: "ph:orange-duotone",             iconColor: "text-[#F97316]" },
+  { time: "14:30–15:30", activity: "Odpolední aktivity, didaktická práce, volná hra, nadstandardní programy",      icon: "ph:paint-brush-duotone",        iconColor: "text-[#EC4899]" },
+  { time: "15:30–17:00", activity: "Individuální hra, vyzvedávání",                                                icon: "ph:users-duotone",              iconColor: "text-[#1565C0]" },
+];
+
+const programs = [
+  { icon: "ph:music-notes-duotone", iconColor: "text-[#D4A017]", title: "Muzikoterapie", desc: "Práce s cajony, bubny a tibetskými mísami. Rytmus a zvuk jako prostředek klidu a rozvoje.", bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { icon: "ph:dog-duotone", iconColor: "text-[#1565C0]", title: "Canisterapie", desc: "Pravidelná setkání s terapeutickým psem pro rozvoj empatie a emocionálního prožívání.", bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { icon: "ph:medal-duotone", iconColor: "text-[#2E7D32]", title: "Atletika a bruslení", desc: "Trénink na ledové ploše stadionu Sareza a atletické aktivity pro pohybový rozvoj.", bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { icon: "ph:plant-duotone", iconColor: "text-[#6A1B9A]", title: "Projekty", desc: "Tematické projekty zaměřené na zvídavost, kreativitu a práci v týmu.", bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+  { icon: "ph:book-open-duotone", iconColor: "text-[#AD1457]", title: "Čtení s babičkami (Přečti)", desc: "Dobrovolnické babičky přicházejí číst dětem pohádky. Krásná mezigenerační tradice.", bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { icon: "ph:mask-happy-duotone", iconColor: "text-[#E65100]", title: "Anglické divadlo", desc: "Divadelní představení v anglickém jazyce — zábavný úvod do světového jazyka.", bg: "bg-[#FFF3E0]", ring: "ring-[#FFCC80]/40" },
+  { icon: "ph:globe-duotone", iconColor: "text-[#D4A017]", title: "Výlet do planetária", desc: "Výpravy do ostravského planetária pro poznávání vesmíru a přírody.", bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+];
+---
+
+<BaseLayout
+  title="Náš den | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Podívejte se na denní program mateřské školy Sluníčko v Ostravě-Porubě. Strukturovaný den plný aktivit, her a smysluplného učení pro děti od 2 let."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/nas-den"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Náš den</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="nas-den-heading" icon="ph:clock-duotone">
+    <h1 id="nas-den-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Pojďte se podívat na náš den
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Každý den je plný smysluplných aktivit, které podporují rozvoj každého dítěte.
+    </p>
+  </PageHero>
+
+  <!-- Denní program -->
+  <section class="py-16 bg-[#F0F7FF]" aria-labelledby="program-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 id="program-heading" class="text-3xl font-black text-[#2D2D2D] md:text-4xl">Denní program</h2>
+        <p class="mt-3 text-gray-500">Strukturovaný den s prostorem pro volnou hru i řízené aktivity.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <ol class="relative border-l-2 border-[#F9C22E]/40 ml-4 space-y-8">
+          {schedule.map(({ time, activity, icon, iconColor }, index) => (
+            <li class="ml-8">
+              <span class="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-[#F9C22E] text-xs font-bold text-[#2D2D2D]">
+                {index + 1}
+              </span>
+              <div class:list={["rounded-lg p-4 ring-1 hover:ring-[#F9C22E] transition", scheduleBgs[index]]}>
+                <div class="flex items-start gap-3">
+                  <Icon name={icon} class:list={["h-7 w-7 shrink-0 mt-0.5", iconColor]} aria-hidden="true" />
+                  <div>
+                    <span class:list={["inline-block rounded-lg px-3 py-0.5 text-xs font-bold text-[#2D2D2D] mb-1", scheduleBgs[index]]}>
+                      {time}
+                    </span>
+                    <p class="text-sm font-semibold text-[#2D2D2D]">{activity}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Speciální programy -->
+  <section class="py-16 bg-white" aria-labelledby="special-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 id="special-heading" class="text-3xl font-black text-[#2D2D2D] md:text-4xl">Speciální programy</h2>
+        <p class="mt-3 text-gray-500 max-w-2xl mx-auto">
+          Nad rámec běžného programu nabízíme unikátní aktivity, které v naší školce obohacují každý den.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {programs.map(({ icon, iconColor, title, desc, bg, ring }) => (
+          <div class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
+            <Icon name={icon} class:list={["h-9 w-9 mb-3", iconColor]} aria-hidden="true" />
+            <h3 class="font-bold text-lg text-[#2D2D2D] mb-2">{title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-[#2D2D2D]" aria-labelledby="nas-den-cta-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 id="nas-den-cta-heading" class="text-3xl font-black text-white md:text-4xl">
+        Chcete, aby váš den začínal s úsměvem?
+      </h2>
+      <p class="mt-4 text-gray-400 leading-relaxed max-w-xl mx-auto">
+        Zapište dítě do naší školky a každý den bude plný radosti, her a nových objevů.
+      </p>
+      <div class="mt-8">
+        <a href="/registrace" class="inline-flex items-center gap-2 rounded-lg bg-[#F9C22E] px-7 py-3.5 font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]">
+          Zapsat dítě
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

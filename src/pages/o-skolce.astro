@@ -1,0 +1,241 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import Logo from "../components/Logo.astro";
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "O školce", "item": "https://www.skolka-slunicko.cz/o-skolce" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Soukromá mateřská škola Sluníčko",
+    "description": "Soukromá mateřská škola rodinného typu v Ostravě-Porubě. Kapacita 24 dětí, individuální přístup.",
+    "slogan": "V semínkách všedních věcí leží klíčky mimořádných spojení.",
+    "url": "https://www.skolka-slunicko.cz",
+    "telephone": "+420725828130",
+    "email": "info@skolka-slunicko.cz",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Bohuslava Martinů 812/11",
+      "addressLocality": "Ostrava-Poruba",
+      "postalCode": "708 00",
+      "addressCountry": "CZ"
+    }
+  }
+];
+
+const team = [
+  {
+    name: "Michaela Krečmerová, DiS.",
+    role: "Ředitelka",
+    icon: "ph:briefcase-duotone",
+    iconColor: "text-[#D4A017]",
+    desc: "Vystudovala předškolní pedagogiku. Ve volném čase ráda cestuje a pozoruje hvězdy — astronomie je její velkou vášní.",
+    bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40",
+  },
+  {
+    name: "Bc. Lucie Sližová, DiS.",
+    role: "Učitelka",
+    icon: "ph:chalkboard-teacher-duotone",
+    iconColor: "text-[#AD1457]",
+    desc: "Absolvovala dějiny umění a má bohaté zkušenosti s dětmi se speciálními potřebami. Miluje kulturní akce a kolečkové bruslení.",
+    bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40",
+  },
+  {
+    name: "Veronika Vlčková",
+    role: "Učitelka",
+    icon: "ph:palette-duotone",
+    iconColor: "text-[#1565C0]",
+    desc: "Vystudovala obchodní akademii a pobývala v USA. Momentálně studuje předškolní pedagogiku. Je hrdou maminkou jednoho dítěte.",
+    bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40",
+  },
+  {
+    name: "Petra Konečná",
+    role: "Provoz & kuchyně",
+    icon: "ph:cooking-pot-duotone",
+    iconColor: "text-[#2E7D32]",
+    desc: "Vystudovala rodinné studie a zodpovídá za kuchyňský provoz. Ve volném čase se věnuje zahrádkaření a cestování.",
+    bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40",
+  },
+];
+
+const activities = [
+  { icon: "ph:music-notes-duotone", iconColor: "text-[#D4A017]", title: "Hudební aktivity", items: ["Zpěv", "Hra na nástroje", "Rytmika", "Muzikoterapie"], bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { icon: "ph:paint-brush-duotone", iconColor: "text-[#AD1457]", title: "Výtvarné aktivity", items: ["Kresba", "Malba", "Keramika", "Modelování"], bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { icon: "ph:mask-happy-duotone", iconColor: "text-[#1565C0]", title: "Dramatické aktivity", items: ["Pohádky", "Dramatizace", "Rozvoj komunikace"], bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { icon: "ph:person-simple-run-duotone", iconColor: "text-[#2E7D32]", title: "Pohybové aktivity", items: ["Atletika", "Bruslení", "Jóga", "Tanec"], bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { icon: "ph:globe-duotone", iconColor: "text-[#6A1B9A]", title: "Jazykový rozvoj", items: ["Sluchové hry", "Slovní zásoba", "Příběhy"], bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+];
+---
+
+<BaseLayout
+  title="O školce Sluníčko | Mateřská škola Ostrava-Poruba"
+  description="Zjistěte více o soukromé mateřské školce Sluníčko v Ostravě-Porubě. Rodinný typ, kapacita 24 dětí, zkušený tým a pestrý vzdělávací program."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/o-skolce"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">O školce</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="o-skolce-heading" icon="ph:heart-duotone" maxWidth="max-w-3xl">
+    <p class="mb-3 inline-flex items-center rounded-lg bg-[#F9C22E]/30 px-4 py-1 text-sm font-semibold text-[#D4A017]">
+      Školka rodinného typu · Ostrava-Poruba
+    </p>
+    <h1 id="o-skolce-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      O naší školce
+    </h1>
+    <blockquote class="mt-6 border-l-4 border-[#F9C22E] pl-6">
+      <p class="text-xl font-semibold italic text-[#2D2D2D] leading-relaxed">
+        „V semínkách všedních věcí leží klíčky mimořádných spojení. Přijde čas, přinesou plody."
+      </p>
+    </blockquote>
+    <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+      Jsme soukromá mateřská škola rodinného typu v Ostravě-Porubě. Naší prioritou je vytvořit prostředí, kde se každé dítě cítí bezpečně, milováno a může naplno rozvíjet svůj potenciál.
+    </p>
+  </PageHero>
+
+  <!-- Základní info -->
+  <section class="py-12 bg-white" aria-labelledby="zakladni-info-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="zakladni-info-heading" class="sr-only">Základní informace o školce</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {[
+          { icon: "ph:house-simple-duotone", label: "Kapacita", value: "24 dětí" },
+          { icon: "ph:buildings-duotone", label: "Provozovatel", value: "REDUZA pro s.r.o." },
+          { icon: "ph:clock-duotone", label: "Provozní doba", value: "Po–Pá 6:30–17:00" },
+        ].map(({ icon, label, value }) => (
+          <div class="rounded-xl bg-[#FFFBF0] p-6 text-center ring-1 ring-[#F9C22E]/30">
+            <Icon name={icon} class="h-9 w-9 mb-2 mx-auto text-[#D4A017]" aria-hidden="true" />
+            <div class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{label}</div>
+            <div class="mt-1 text-lg font-black text-[#2D2D2D]">{value}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Vzdělávací aktivity -->
+  <section class="py-16 bg-[#FFFBF0]" aria-labelledby="aktivity-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 id="aktivity-heading" class="text-3xl font-black text-[#2D2D2D] md:text-4xl">Vzdělávací aktivity</h2>
+        <p class="mt-3 text-gray-500 max-w-2xl mx-auto">Každý den je plný pestrých aktivit, které podporují všestranný rozvoj dítěte.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {activities.map(({ icon, iconColor, title, items, bg, ring }) => (
+          <div class:list={["rounded-xl p-6 ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
+            <Icon name={icon} class:list={["h-9 w-9 mb-3", iconColor]} aria-hidden="true" />
+            <h3 class="font-bold text-lg text-[#2D2D2D] mb-3">{title}</h3>
+            <ul class="space-y-1">
+              {items.map((item) => (
+                <li class="flex items-center gap-2 text-sm text-gray-600">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#F9C22E] shrink-0" aria-hidden="true"></span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnerství s rodiči -->
+  <section class="py-16 bg-[#FFF0F5]" aria-labelledby="rodice-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 id="rodice-heading" class="text-3xl font-black text-[#2D2D2D] md:text-4xl mb-4">
+            Partnerství s rodiči
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-6">
+            Věříme, že spolupráce s rodinami je základem zdravého rozvoje dítěte. Proto pořádáme celou řadu společných akcí.
+          </p>
+          <ul class="space-y-4">
+            {[
+              { icon: "ph:coffee-duotone", iconBg: "bg-[#E3F2FD]", iconColor: "text-[#1565C0]", title: "Snídaně s rodiči", desc: "Každý první pátek v měsíci zveme rodiče na společnou snídani do školky." },
+              { icon: "ph:paint-brush-duotone", iconBg: "bg-[#FFF9C4]", iconColor: "text-[#D4A017]", title: "Tvořivé dílny", desc: "Vánoční a velikonoční dílny, kde tvoříme společně děti i rodiče." },
+              { icon: "ph:mask-happy-duotone", iconBg: "bg-[#FCE4EC]", iconColor: "text-[#AD1457]", title: "Besídky", desc: "Pravidelné besídky, kde děti předvádějí, co se naučily." },
+              { icon: "ph:book-open-duotone", iconBg: "bg-[#E8F5E9]", iconColor: "text-[#2E7D32]", title: "Projekt Přečti", desc: "Dobrovolnické babičky přicházejí číst dětem pohádky — mezigenerační spolupráce, která obohacuje všechny." },
+            ].map(({ icon, iconBg, iconColor, title, desc }) => (
+              <li class="flex gap-4">
+                <div class:list={["flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center", iconBg]} aria-hidden="true">
+                  <Icon name={icon} class:list={["h-5 w-5", iconColor]} />
+                </div>
+                <div>
+                  <h3 class="font-bold text-[#2D2D2D]">{title}</h3>
+                  <p class="text-sm text-gray-600 mt-0.5">{desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-xl bg-[#EDE7F6] p-8 ring-1 ring-[#CE93D8]/40">
+          <Icon name="ph:users-three-duotone" class="h-12 w-12 text-[#6A1B9A] mb-4 mx-auto" aria-hidden="true" />
+          <h3 class="text-xl font-black text-center text-[#2D2D2D] mb-4">Zapojte se do života školky</h3>
+          <p class="text-gray-600 text-center leading-relaxed">
+            Naše školka je místem, kde rodiče nejsou jen hosty — jsou plnohodnotnými partnery ve výchově a vzdělávání vašeho dítěte.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tým -->
+  <section class="py-16 bg-[#FFFBF0]" aria-labelledby="tym-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 id="tym-heading" class="text-3xl font-black text-[#2D2D2D] md:text-4xl">Náš tým</h2>
+        <p class="mt-3 text-gray-500">Zkušené pedagožky, které milují svoji práci a vaše děti.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {team.map(({ name, role, icon, iconColor, desc, bg, ring }) => (
+          <div class:list={["rounded-xl p-6 text-center ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
+            <Icon name={icon} class:list={["h-9 w-9 mb-3 mx-auto", iconColor]} aria-hidden="true" />
+            <h3 class="font-bold text-[#2D2D2D] text-sm">{name}</h3>
+            <p class="text-sm font-semibold text-[#D4A017] mt-1 mb-3">{role}</p>
+            <p class="text-xs text-gray-500 leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-[#2D2D2D]" aria-labelledby="o-skolce-cta-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <Logo width={52} height={55} class="mb-4 mx-auto" />
+      <h2 id="o-skolce-cta-heading" class="text-3xl font-black text-white md:text-4xl">Pojďte se podívat</h2>
+      <p class="mt-4 text-gray-400 leading-relaxed max-w-xl mx-auto">
+        Rádi vám ukážeme školku osobně. Napište nám nebo zavolejte a domluvíme termín prohlídky.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/kontakt" class="inline-flex items-center gap-2 rounded-lg bg-[#F9C22E] px-7 py-3.5 font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]">
+          Kontaktujte nás
+        </a>
+        <a href="/registrace" class="inline-flex items-center gap-2 rounded-lg border-2 border-white px-7 py-3.5 font-bold text-white transition hover:bg-white hover:text-[#2D2D2D]">
+          Zapsat dítě
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

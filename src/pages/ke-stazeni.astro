@@ -1,0 +1,134 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import PageHero from "../components/PageHero.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Ke stažení", "item": "https://www.skolka-slunicko.cz/ke-stazeni" }
+    ]
+  }
+];
+
+const docColors = [
+  { bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+  { bg: "bg-[#EDE7F6]", ring: "ring-[#CE93D8]/40" },
+  { bg: "bg-[#FFF3E0]", ring: "ring-[#FFCC80]/40" },
+  { bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40" },
+  { bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40" },
+  { bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40" },
+  { bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40" },
+];
+
+const documents = [
+  { name: "Žádost o přijetí", type: ".doc", icon: "ph:file-doc-duotone", href: "/dokumenty/zadost-o-prijeti.doc" },
+  { name: "Přihláška dítěte", type: ".pdf", icon: "ph:file-pdf-duotone", href: "/dokumenty/prihlaska-ditete.pdf" },
+  { name: "Pověření k předání", type: ".pdf", icon: "ph:file-pdf-duotone", href: "/dokumenty/povereni-k-predani.pdf" },
+  { name: "Prohlášení o zdravotním stavu", type: ".pdf", icon: "ph:file-pdf-duotone", href: "/dokumenty/prohlaseni-o-zdravotnim-stavu.pdf" },
+  { name: "Žádost o ukončení docházky", type: ".pdf", icon: "ph:file-pdf-duotone", href: "/dokumenty/zadost-o-ukonceni-dochazky.pdf" },
+  { name: "Školní vzdělávací program 2023", type: ".docx", icon: "ph:book-open-duotone", href: "/dokumenty/skolni-vzdelavaci-program-2023.docx" },
+  { name: "Kritéria přijetí", type: ".doc", icon: "ph:check-circle-duotone", href: "/dokumenty/kriteria-prijeti.doc" },
+  { name: "Školní řád", type: ".pdf", icon: "ph:clipboard-text-duotone", href: "/dokumenty/skolni-rad.pdf" },
+  { name: "Dodatek ke školnímu řádu", type: ".docx", icon: "ph:clipboard-text-duotone", href: "/dokumenty/dodatek-ke-skolnimu-radu.docx" },
+  { name: "Operační program Zaměstnanost (ESF)", type: ".pdf", icon: "ph:globe-duotone", href: "/dokumenty/esf-op-zamestnanost.pdf" },
+];
+
+const docIconColors = [
+  "text-[#D4A017]",
+  "text-[#AD1457]",
+  "text-[#1565C0]",
+  "text-[#2E7D32]",
+  "text-[#6A1B9A]",
+  "text-[#E65100]",
+  "text-[#D4A017]",
+  "text-[#AD1457]",
+  "text-[#1565C0]",
+  "text-[#2E7D32]",
+];
+---
+
+<BaseLayout
+  title="Ke stažení | Mateřská škola Sluníčko Ostrava-Poruba"
+  description="Dokumenty ke stažení pro MŠ Sluníčko Ostrava-Poruba: přihláška dítěte, školní řád, vzdělávací program, zdravotní prohlášení a další formuláře."
+  schema={schema}
+  canonical="https://www.skolka-slunicko.cz/ke-stazeni"
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D]" aria-current="page">Ke stažení</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <PageHero labelId="ke-stazeni-heading" icon="ph:files-duotone">
+    <h1 id="ke-stazeni-heading" class="text-4xl font-black text-[#2D2D2D] sm:text-5xl leading-tight">
+      Ke stažení
+    </h1>
+    <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+      Všechny potřebné dokumenty pro zápis a docházku vašeho dítěte.
+    </p>
+  </PageHero>
+
+  <!-- Dokumenty -->
+  <section class="py-16 bg-[#F0FFF4]" aria-labelledby="dokumenty-heading">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 id="dokumenty-heading" class="sr-only">Seznam dokumentů ke stažení</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {documents.map(({ name, type, icon, href }, i) => (
+          <div class:list={["rounded-xl p-5 ring-1 hover:ring-[#F9C22E] transition flex flex-col justify-between gap-4", docColors[i].bg, docColors[i].ring]}>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-[#F9C22E]/20 flex items-center justify-center" aria-hidden="true">
+                <Icon name={icon} class:list={["h-6 w-6", docIconColors[i]]} />
+              </div>
+              <div>
+                <h3 class="font-bold text-[#2D2D2D] text-sm leading-tight">{name}</h3>
+                <span class="inline-block mt-1 rounded-lg bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  {type}
+                </span>
+              </div>
+            </div>
+            <a
+              href={href}
+              download
+              aria-label={`Stáhnout ${name}`}
+              class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#F9C22E] px-4 py-2 text-xs font-bold text-[#2D2D2D] transition hover:bg-[#D4A017]"
+            >
+              <Icon name="ph:download-simple-duotone" class="h-3.5 w-3.5 text-[#2D2D2D]" aria-hidden="true" />
+              Stáhnout
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Dokumenty jsou průběžně aktualizovány. V případě nejasností nás{" "}
+        <a href="/kontakt" class="font-semibold text-[#D4A017] hover:underline">kontaktujte</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 bg-[#FFFBF0]" aria-labelledby="ke-stazeni-cta-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 id="ke-stazeni-cta-heading" class="text-xl font-black text-[#2D2D2D] mb-3">Potřebujete pomoci?</h2>
+      <p class="text-gray-600 mb-5 text-sm">Pokud si nejste jistí, který dokument potřebujete, rádi vám poradíme.</p>
+      <a href="/kontakt" class="inline-flex items-center rounded-lg bg-[#F9C22E] px-6 py-3 font-bold text-[#2D2D2D] text-sm transition hover:bg-[#D4A017]">
+        Kontaktujte nás
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

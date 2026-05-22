@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Icon } from 'astro-icon/components';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: "masopustni-pruvod-2025" },
+      props: {
+        title: "Masopustní průvod 2025",
+        date: "2025-02-15",
+        dateFormatted: "15. 2. 2025",
+        icon: "ph:mask-happy-duotone",
+        iconColor: "text-[#D4A017]",
+        content: [
+          "Letošní masopust byl plný barev a smíchu. Děti si v předchozích dnech vyrobily krásné masky a kostýmy, se kterými pak v masopustní úterý prošly průvodem kolem školky.",
+          "Průvod byl radostný a veselý — děti zpívaly, tančily a strašily kolemjdoucí svými maskami. Rodiče, kteří se přišli podívat, odměnili vystoupení velkým potleskem.",
+          "Děkujeme všem, kteří se podíleli na přípravě tohoto tradičního svátku. Takové chvíle jsou důkazem, že v naší školce žijeme naplno.",
+        ],
+      },
+    },
+    {
+      params: { slug: "brusleni-nova-sezona" },
+      props: {
+        title: "Bruslení — nová sezóna",
+        date: "2024-09-10",
+        dateFormatted: "10. 9. 2024",
+        icon: "ph:medal-duotone",
+        iconColor: "text-[#1565C0]",
+        content: [
+          "Zahájili jsme novou bruslařskou sezónu na stadionu Sareza. Děti se moc těší a mnohé z nich si svůj první výjezd na led velmi chválily.",
+          "Bruslení probíhá pod vedením zkušených trenérů, kteří mají s prací s nejmenšími bruslaři bohaté zkušenosti. Brusle a přilby jsou zapůjčeny zdarma.",
+          "Trénink probíhá v dopoledních hodinách v rámci programu školky. Pokud se vaše dítě chce bruslení zúčastnit, je vítáno!",
+        ],
+      },
+    },
+    {
+      params: { slug: "vanocni-besidka" },
+      props: {
+        title: "Vánoční besídka",
+        date: "2024-12-20",
+        dateFormatted: "20. 12. 2024",
+        icon: "ph:star-duotone",
+        iconColor: "text-[#6A1B9A]",
+        content: [
+          "Děkujeme všem rodičům, prarodičům a přátelům školky za účast na naší vánoční besídce. Bylo to kouzelné odpoledne plné zpěvu, básniček a radosti.",
+          "Děti vystoupily s pásem vánočních písní a básniček, které pečlivě nacvičovaly celý měsíc. Jejich výkon byl skvělý a všichni přítomní byli dojati.",
+          "Po besídce se konaly společné vánoční dílny, kde děti s rodiči vyráběly vánoční ozdoby. Těšíme se na další setkání v novém roce!",
+        ],
+      },
+    },
+  ];
+}
+
+interface Props {
+  title: string;
+  date: string;
+  dateFormatted: string;
+  icon: string;
+  iconColor: string;
+  content: string[];
+}
+
+const { title, date, dateFormatted, icon, iconColor, content } = Astro.props;
+const { slug } = Astro.params;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Domů", "item": "https://www.skolka-slunicko.cz" },
+      { "@type": "ListItem", "position": 2, "name": "Aktuality", "item": "https://www.skolka-slunicko.cz/aktuality" },
+      { "@type": "ListItem", "position": 3, "name": title, "item": `https://www.skolka-slunicko.cz/aktuality/${slug}` }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": title,
+    "datePublished": date,
+    "dateModified": date,
+    "author": {
+      "@type": "Organization",
+      "name": "Mateřská škola Sluníčko"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Mateřská škola Sluníčko",
+      "url": "https://www.skolka-slunicko.cz"
+    },
+    "url": `https://www.skolka-slunicko.cz/aktuality/${slug}`
+  }
+];
+---
+
+<BaseLayout
+  title={`${title} | MŠ Sluníčko`}
+  description={content[0]}
+  schema={schema}
+  canonical={`https://www.skolka-slunicko.cz/aktuality/${slug}`}
+>
+
+  <!-- Breadcrumb -->
+  <nav aria-label="Drobečková navigace" class="bg-white border-b border-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
+        <li><a href="/" class="hover:text-[#D4A017] transition">Domů</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li><a href="/aktuality" class="hover:text-[#D4A017] transition">Aktuality</a></li>
+        <li aria-hidden="true" class="text-gray-300">/</li>
+        <li class="font-semibold text-[#2D2D2D] truncate max-w-xs" aria-current="page">{title}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Článek -->
+  <article class="py-16 bg-[#FFFBF0]" aria-labelledby="article-heading">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <header class="mb-8">
+        <Icon name={icon} class:list={["h-12 w-12 mb-4", iconColor]} aria-hidden="true" />
+        <time dateTime={date} class="inline-flex items-center rounded-lg bg-[#FFF9C4] px-3 py-0.5 text-xs font-bold text-[#2D2D2D] mb-4">
+          {dateFormatted}
+        </time>
+        <h1 id="article-heading" class="text-3xl font-black text-[#2D2D2D] sm:text-4xl leading-tight">
+          {title}
+        </h1>
+      </header>
+
+      <div class="bg-white rounded-xl p-8 ring-1 ring-[#F9C22E]/30 space-y-4">
+        {content.map((paragraph) => (
+          <p class="text-gray-700 leading-relaxed">{paragraph}</p>
+        ))}
+      </div>
+
+      <div class="mt-8">
+        <a
+          href="/aktuality"
+          class="inline-flex items-center gap-2 rounded-lg border-2 border-[#2D2D2D] px-6 py-2.5 text-sm font-bold text-[#2D2D2D] transition hover:bg-[#2D2D2D] hover:text-white"
+        >
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Zpět na aktuality
+        </a>
+      </div>
+    </div>
+  </article>
+
+</BaseLayout>
