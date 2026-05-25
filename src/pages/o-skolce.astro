@@ -36,34 +36,30 @@ const team = [
   {
     name: "Michaela Krečmerová, DiS.",
     role: "Ředitelka",
-    icon: "ph:briefcase-duotone",
-    iconColor: "text-[#D4A017]",
+    photo: "/images/tym/michaela.jpg",
     desc: "Vystudovala předškolní pedagogiku. Ve volném čase ráda cestuje a pozoruje hvězdy — astronomie je její velkou vášní.",
-    bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40",
+    bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40", ringPhoto: "ring-[#FFD600]",
   },
   {
     name: "Bc. Lucie Sližová, DiS.",
     role: "Učitelka",
-    icon: "ph:chalkboard-teacher-duotone",
-    iconColor: "text-[#AD1457]",
+    photo: "/images/tym/lucie.jpg",
     desc: "Absolvovala dějiny umění a má bohaté zkušenosti s dětmi se speciálními potřebami. Miluje kulturní akce a kolečkové bruslení.",
-    bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40",
+    bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40", ringPhoto: "ring-[#F48FB1]",
   },
   {
     name: "Veronika Vlčková",
     role: "Učitelka",
-    icon: "ph:palette-duotone",
-    iconColor: "text-[#1565C0]",
+    photo: "/images/tym/veronika.jpg",
     desc: "Vystudovala obchodní akademii a pobývala v USA. Momentálně studuje předškolní pedagogiku. Je hrdou maminkou jednoho dítěte.",
-    bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40",
+    bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40", ringPhoto: "ring-[#90CAF9]",
   },
   {
     name: "Petra Konečná",
     role: "Provoz & kuchyně",
-    icon: "ph:cooking-pot-duotone",
-    iconColor: "text-[#2E7D32]",
+    photo: "/images/tym/petra.png",
     desc: "Vystudovala rodinné studie a zodpovídá za kuchyňský provoz. Ve volném čase se věnuje zahrádkaření a cestování.",
-    bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40",
+    bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40", ringPhoto: "ring-[#A5D6A7]",
   },
 ];
 
@@ -207,9 +203,11 @@ const activities = [
         <p class="mt-3 text-gray-500">Zkušené pedagožky, které milují svoji práci a vaše děti.</p>
       </div>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {team.map(({ name, role, icon, iconColor, desc, bg, ring }) => (
+        {team.map(({ name, role, photo, desc, bg, ring, ringPhoto }) => (
           <div class:list={["rounded-xl p-6 text-center ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
-            <Icon name={icon} class:list={["h-9 w-9 mb-3 mx-auto", iconColor]} aria-hidden="true" />
+            <div class:list={["w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden ring-4", ringPhoto]}>
+              <img src={photo} alt={name} width="96" height="96" class="w-full h-full object-cover" loading="lazy" />
+            </div>
             <h3 class="font-bold text-[#2D2D2D] text-sm">{name}</h3>
             <p class="text-sm font-semibold text-[#D4A017] mt-1 mb-3">{role}</p>
             <p class="text-xs text-gray-500 leading-relaxed">{desc}</p>
