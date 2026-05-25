@@ -37,6 +37,8 @@ const team = [
     name: "Michaela Krečmerová, DiS.",
     role: "Ředitelka",
     photo: "/images/tym/michaela.jpg",
+    icon: "ph:briefcase-duotone",
+    iconColor: "text-[#D4A017]",
     desc: "Vystudovala předškolní pedagogiku. Ve volném čase ráda cestuje a pozoruje hvězdy — astronomie je její velkou vášní.",
     bg: "bg-[#FFF9C4]", ring: "ring-[#FFD600]/40", ringPhoto: "ring-[#FFD600]",
   },
@@ -44,6 +46,8 @@ const team = [
     name: "Bc. Lucie Sližová, DiS.",
     role: "Učitelka",
     photo: "/images/tym/lucie.jpg",
+    icon: "ph:chalkboard-teacher-duotone",
+    iconColor: "text-[#AD1457]",
     desc: "Absolvovala dějiny umění a má bohaté zkušenosti s dětmi se speciálními potřebami. Miluje kulturní akce a kolečkové bruslení.",
     bg: "bg-[#FCE4EC]", ring: "ring-[#F48FB1]/40", ringPhoto: "ring-[#F48FB1]",
   },
@@ -51,6 +55,8 @@ const team = [
     name: "Veronika Vlčková",
     role: "Učitelka",
     photo: "/images/tym/veronika.jpg",
+    icon: "ph:palette-duotone",
+    iconColor: "text-[#1565C0]",
     desc: "Vystudovala obchodní akademii a pobývala v USA. Momentálně studuje předškolní pedagogiku. Je hrdou maminkou jednoho dítěte.",
     bg: "bg-[#E3F2FD]", ring: "ring-[#90CAF9]/40", ringPhoto: "ring-[#90CAF9]",
   },
@@ -58,6 +64,8 @@ const team = [
     name: "Petra Konečná",
     role: "Provoz & kuchyně",
     photo: "/images/tym/petra.png",
+    icon: "ph:cooking-pot-duotone",
+    iconColor: "text-[#2E7D32]",
     desc: "Vystudovala rodinné studie a zodpovídá za kuchyňský provoz. Ve volném čase se věnuje zahrádkaření a cestování.",
     bg: "bg-[#E8F5E9]", ring: "ring-[#A5D6A7]/40", ringPhoto: "ring-[#A5D6A7]",
   },
@@ -203,10 +211,15 @@ const activities = [
         <p class="mt-3 text-gray-500">Zkušené pedagožky, které milují svoji práci a vaše děti.</p>
       </div>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {team.map(({ name, role, photo, desc, bg, ring, ringPhoto }) => (
+        {team.map(({ name, role, photo, icon, iconColor, desc, bg, ring, ringPhoto }) => (
           <div class:list={["rounded-xl p-6 text-center ring-1 hover:ring-[#F9C22E] transition", bg, ring]}>
-            <div class:list={["w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden ring-4", ringPhoto]}>
-              <img src={photo} alt={name} width="96" height="96" class="w-full h-full object-cover" loading="lazy" />
+            <div class="relative w-24 h-24 mx-auto mb-4">
+              <div class:list={["w-24 h-24 rounded-full overflow-hidden ring-4", ringPhoto]}>
+                <img src={photo} alt={name} width="96" height="96" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm ring-1 ring-gray-100">
+                <Icon name={icon} class:list={["h-4 w-4", iconColor]} aria-hidden="true" />
+              </div>
             </div>
             <h3 class="font-bold text-[#2D2D2D] text-sm">{name}</h3>
             <p class="text-sm font-semibold text-[#D4A017] mt-1 mb-3">{role}</p>
